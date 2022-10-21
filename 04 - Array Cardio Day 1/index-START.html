@@ -38,16 +38,40 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    const fiftysInventors = inventors.filter(inventor => (1499 < inventor.year && inventor.year < 1600));
+    console.table(fiftysInventors);
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+
+    const inventorsNames = inventors.map(inventor => { return {first: inventor.first, last: inventor.last}});
+    console.table(inventorsNames);
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    const sortedInventors = inventors.sort((first, second) => {
+        return (first.year < second.year) ? 1 : -1;
+    });
+    console.table(sortedInventors);
+
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    const totalYear = inventors.reduce((total, second) => total + (second.passed - second.year), 0);
+    console.log(totalYear);
+
     // 5. Sort the inventors by years lived
+
+    const mostLivedInventors = inventors.sort((first, second) => {
+        let firstYears = first.passed - first.year;
+        let secondYears = second.passed - second.year;
+
+        return (firstYears > secondYears) ? 1 : -1
+    })
+    console.log(mostLivedInventors);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -55,10 +79,25 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    
+    const alphaSortInventors = inventors.sort((first, second) => {
+        return (first.last < second.last) ? 1 : -1;
+    });
+    console.table(alphaSortInventors);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    const instances = data.reduce((obj, item) => {
+        if (!obj[item]) {
+            obj[item] = 1;
+        } else {
+            obj[item] += 1; 
+        }
+        return obj;
+    }, {});
+    console.log(instances);
 
   </script>
 </body>
